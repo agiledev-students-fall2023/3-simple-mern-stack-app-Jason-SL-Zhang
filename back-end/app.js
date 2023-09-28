@@ -21,6 +21,7 @@ mongoose
 // load the dataabase models we want to deal with
 const { Message } = require('./models/Message')
 const { User } = require('./models/User')
+const { default: AboutUs } = require('../front-end/src/AboutUs')
 
 // a route to handle fetching all messages
 app.get('/messages', async (req, res) => {
@@ -43,7 +44,7 @@ app.get('/messages', async (req, res) => {
 app.get('/about-us', async (req, res) => {
   // load all messages from database
   try {
-    const aboutData = await AboutInfo.findOne({})
+    const aboutData = await AboutUs.findOne({})
     res.json({
       aboutData: aboutData,
       status: 'all good',
