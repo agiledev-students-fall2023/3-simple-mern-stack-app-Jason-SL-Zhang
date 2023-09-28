@@ -7,7 +7,6 @@ const AboutUs = props => {
   return (
     <>
       <h1>About Us</h1><br></br>
-      <p>text-align: left</p>
       <p>
         Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, 
         and moved to Great Neck, New York, when I was ten years old.
