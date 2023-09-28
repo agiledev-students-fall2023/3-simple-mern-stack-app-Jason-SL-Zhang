@@ -1,5 +1,5 @@
 .image {
-    width: auto;       /* Set width to desired value */
+    width: 500;       /* Set width to desired value */
     height: auto;       /* Maintain the aspect ratio */
     display: block;     /* To allow for margin auto to work */
     margin: 0 auto;     /* Optional: Center the image horizontally */
