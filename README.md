@@ -63,7 +63,7 @@ If you have trouble running Docker on your computer, use a database hosted on [M
 When running locally on your machine, others can't access the app. To give temporary access to others to run the app on your machine:
 
 - install [ngrok](https://ngrok.com/download)
-- run the command, `ngrok http 4000`
+- run the command, `ngrok http 7002`
 
 ngrok will then spit out a temporary URL that you can share with others to give them access to the app running on your machine
 
