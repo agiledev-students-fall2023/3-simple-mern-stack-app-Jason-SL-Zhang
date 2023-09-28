@@ -6,6 +6,8 @@
     text-align: left;   
 }
 
-.AboutUs {
+.about-us {
+    margin: 0 auto;
+    width: 80%;
     text-align: left;
 }
