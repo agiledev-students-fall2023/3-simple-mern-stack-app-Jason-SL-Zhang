@@ -9,7 +9,7 @@ const AboutUs = props => {
       <h1>About Us</h1>
       <p>
         Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, 
-        and moved to Great Neck, New York, when I was ten years old. 
+        and moved to Great Neck, New York, when I was ten years old. \n
       </p>
       <p>
         I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement 
