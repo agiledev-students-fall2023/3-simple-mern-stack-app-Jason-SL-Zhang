@@ -40,7 +40,7 @@ app.get('/messages', async (req, res) => {
   }
 })
 
-app.get('/aboutus', (req, res) => {
+app.get('/about-us', (req, res) => {
   const aboutData = {
     title: 'Jason Zhang',
     content: [
