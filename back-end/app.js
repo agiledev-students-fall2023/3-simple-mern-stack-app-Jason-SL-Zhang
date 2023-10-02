@@ -21,7 +21,6 @@ mongoose
 // load the dataabase models we want to deal with
 const { Message } = require('./models/Message')
 const { User } = require('./models/User')
-const { default: AboutUs } = require('../front-end/src/AboutUs')
 
 // a route to handle fetching all messages
 app.get('/messages', async (req, res) => {
@@ -40,14 +39,6 @@ app.get('/messages', async (req, res) => {
     })
   }
 })
-
-app.get('/about-us', (req, res) => {
-  res.json({ 
-    name: "Jason Zhang",
-    description: "Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old. I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy playing League of Legends, watching movies, and traveling.",
-    imageURL: "http://localhost:5002/static/images/photo.jpg"
-  });
-});
 
 // a route to handle fetching a single message by its id
 app.get('/messages/:messageId', async (req, res) => {
@@ -86,6 +77,28 @@ app.post('/messages/save', async (req, res) => {
     })
   }
 })
+
+// a route to handle fetching about me information
+app.get('/aboutme', async (req, res) => {
+  console.log('received request for /aboutme')
+  try {
+      const aboutData = {
+          paragraphs: [
+              "Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old. I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy playing League of Legends, watching movies, and traveling."
+          ]
+      };
+      res.json(aboutData);
+  } catch (err) {
+      console.error('Error handling for /aboutme', err);
+      res.status(400).json({
+          error: err,
+          status: 'failed to retrieve about me information',
+      })
+  }
+})
+
+// export the express app we created to make it available to other modules
+module.exports = app // CommonJS export style!
 
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!

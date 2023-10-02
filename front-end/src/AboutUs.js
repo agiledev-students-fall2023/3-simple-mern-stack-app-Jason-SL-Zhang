@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import './AboutUs.css'
 
-const AboutUs = () => {
-    
+const AboutMe = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        console.log("Fetching data from /about-us");
-        fetch('http://localhost:5002/about-us')
+        console.log("fetching about data")
+        // Fetch the about me data from the backend
+        fetch('http://localhost:5002/aboutme')
             .then(response => response.json())
             .then(data => setData(data));
     }, []);
 
-    if (!data) return <p>Loading...</p>;
+    // error handling..
+    if (data === null) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div>
-        <img src={data.imageURL} alt="About Me" className="image" />
-        <p>{data.description}</p>
+        <div className="AboutMe">
+            {data.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+            ))}
+            <img src="/photo.jpg" alt="Jason Zhang" style={{ width: '300px', height: 'auto', margin: "20px 0" }} />
         </div>
     );
-}
+};
 
-export default AboutUs;
+export default AboutMe;
