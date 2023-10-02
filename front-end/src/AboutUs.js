@@ -1,24 +1,25 @@
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
 import './AboutUs.css'
-import photo from './photo.jpg'
-import React from 'react' 
 
-const AboutUs = props => {
-  return (
-    <>
-      <p class = "text">
-        Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, 
-        and moved to Great Neck, New York, when I was ten years old.
-      </p><br></br>
-      <p class = "text">
-        I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement 
-        and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy 
-        playing League of Legends, watching movies, and traveling.
-      </p><br></br>
-      <img src ={photo} alt = "Description" className = "image"/>
-    </>
-  )
+const AboutUs = () => {
+    
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        console.log("Fetching data from /about-us");
+        fetch('http://localhost:5002/about-us')
+            .then(response => response.json())
+            .then(data => setData(data));
+    }, []);
+
+    if (!data) return <p>Loading...</p>;
+
+    return (
+        <div>
+        <img src={data.imageURL} alt="About Me" className="image" />
+        <p>{data.description}</p>
+        </div>
+    );
 }
 
-// make this component available to be imported into any other file
-export default AboutUs
+export default AboutUs;

@@ -44,7 +44,7 @@ app.get('/messages', async (req, res) => {
 app.get('/about-us', async (req, res) => {
   // load all messages from database
   try {
-    const aboutData = await AboutUs.findOne({})
+    const aboutData = {paragraph: ["Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old."]};
     res.json({
       aboutData: aboutData,
       status: 'all good',
