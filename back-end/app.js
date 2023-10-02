@@ -80,7 +80,7 @@ app.post('/messages/save', async (req, res) => {
 
 // a route to handle fetching about me information
 app.get('/aboutme', async (req, res) => {
-  console.log('received request for /aboutme')
+  console.log('received request for /about-us')
   try {
       const aboutData = {
           paragraphs: [

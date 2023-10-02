@@ -6,7 +6,7 @@ const AboutMe = () => {
     useEffect(() => {
         console.log("fetching about data")
         // Fetch the about me data from the backend
-        fetch('http://localhost:5002/aboutme')
+        fetch('http://localhost:5002/about-us')
             .then(response => response.json())
             .then(data => setData(data));
     }, []);
@@ -17,7 +17,7 @@ const AboutMe = () => {
     }
 
     return (
-        <div className="AboutMe">
+        <div className="AboutUs">
             {data.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
             ))}
