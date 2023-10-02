@@ -30,7 +30,7 @@ const AboutUs = props => {
     return (
       <>
         {error && <p className = "Messages-error">{error}</p>}
-        <text> {paragraph_1} <br></br> {paragraph_2}
+        <text> {paragraph}
         </text>
         <br></br>
         <img src = {photo} alt = "me" />
