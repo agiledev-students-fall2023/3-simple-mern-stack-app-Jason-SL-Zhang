@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './AboutUs.css';
 
-const AboutUs = () => {
-  const [aboutMeContent, setAboutMeContent] = useState('')
-  const [aboutMeImage, setAboutMeImage] = useState('')
+const AboutPage = props => {
+  const [aboutPageData, setAboutPageData] = useState({});
+  const [imageSource, setImageSource] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5002/about-us')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.image)
-        setAboutMeContent(data.content)
-        setAboutMeImage(data.image)
+    axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
+      .then(res => {
+        setAboutPageData(res.data);
+        setImageSource(res.data.imageUrl);
       })
-
-      .catch(error => console.error('Error fetching "About Us" data:', error))
-  }, [])
+      .catch(err => {
+        console.log(`Error: ${err}`);
+      });
+  }, []);
 
   return (
-    <div>
-      <h2>About Us</h2>
-      <p>{aboutMeContent}</p>
-      <img src={aboutMeImage} alt="Me" width="500" height="600" />
-    </div>
-  )
-}
-export default AboutUs
+    <>
+      <h1 className="about">{aboutPageData.title}</h1>
+      {aboutPageData.content && aboutPageData.content.map((paragraph, index) => (
+        <React.Fragment key={index}>
+          <p className="about">{paragraph}</p>
+          {index !== aboutPageData.content.length - 1 && <br />}
+        </React.Fragment>
+      ))}
+      <img className="aboutimg" src={imageSource} alt="About Us" />
+    </>
+  );
+};
+
+export default AboutPage;
