@@ -7,7 +7,7 @@ const AboutPage = props => {
   const [imageSource, setImageSource] = useState('');
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
+    axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/about-us`)
       .then(res => {
         setAboutPageData(res.data);
         setImageSource(res.data.imageUrl);
