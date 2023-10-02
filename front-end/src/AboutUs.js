@@ -29,11 +29,10 @@ const AboutUs = props => {
 
     return (
       <>
-        <h1>About Us</h1>
-        
-        {error && <p className="Messages-error">{error}</p>}
-        <p>{paragraph}</p>
-        <img src={photo} alt="a photo of myself" />
+        {error && <p className = "Messages-error">{error}</p>}
+        <text> {paragraph}
+        </text>
+        <img src = {photo} alt = "me" />
       </>
     )
   }
