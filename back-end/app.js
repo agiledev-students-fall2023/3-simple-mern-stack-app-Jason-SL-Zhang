@@ -22,11 +22,17 @@ mongoose
 const { Message } = require('./models/Message')
 const { User } = require('./models/User')
 
+const transformGoogleDriveLink = (link) => {
+  const fileId = link.split('/d/')[1].split('/view')[0];
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+};
+
 app.get('/aboutus', async (req, res) => {
   try {
     res.json({
-      paragraph: "Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old. \n I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy playing League of Legends, watching movies, and traveling.",
-      photo: "https://drive.google.com/file/d/1FnybmdunvpbnT50v_-O_CRrUBKM4xzp_/view?pli=1",
+      paragraph_1: "Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old.",
+      paragraph_2: "I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy playing League of Legends, watching movies, and traveling.",
+      photo: transformGoogleDriveLink("https://drive.google.com/file/d/1FnybmdunvpbnT50v_-O_CRrUBKM4xzp_/view?pli=1"),
     })
   } catch (err) {
     console.log(err)
