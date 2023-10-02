@@ -1,29 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-const AboutMe = () => {
-    const [data, setData] = useState(null);
+const AboutUs = () => {
+  const [aboutMeContent, setAboutMeContent] = useState('')
+  const [aboutMeImage, setAboutMeImage] = useState('')
 
-    useEffect(() => {
-        console.log("fetching about data")
-        // Fetch the about me data from the backend
-        fetch('http://localhost:5002/about-us')
-            .then(response => response.json())
-            .then(data => setData(data));
-    }, []);
+  useEffect(() => {
+    fetch('http://localhost:5002/about-us')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.image)
+        setAboutMeContent(data.content)
+        setAboutMeImage(data.image)
+      })
 
-    // error handling..
-    if (data === null) {
-        return <div>Loading...</div>;
-    }
+      .catch(error => console.error('Error fetching "About Us" data:', error))
+  }, [])
 
-    return (
-        <div className="AboutUs">
-            {data.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-            ))}
-            <img src="/photo.jpg" alt="Jason Zhang" style={{ width: '300px', height: 'auto', margin: "20px 0" }} />
-        </div>
-    );
-};
-
-export default AboutMe;
+  return (
+    <div>
+      <h2>About Us</h2>
+      <p>{aboutMeContent}</p>
+      <img src={aboutMeImage} alt="Me" width="500" height="600" />
+    </div>
+  )
+}
+export default AboutUs
