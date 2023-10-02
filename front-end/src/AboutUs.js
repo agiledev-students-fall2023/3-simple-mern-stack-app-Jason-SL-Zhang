@@ -1,34 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './AboutUs.css';
+import React, { Component } from 'react';
 
-const AboutPage = props => {
-  const [aboutPageData, setAboutPageData] = useState({});
-  const [imageSource, setImageSource] = useState('');
+class AboutUs extends Component {
+  state = {
+    paragraphs: [],
+    imageUrl: '',
+  };
 
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/about-us`)
-      .then(res => {
-        setAboutPageData(res.data);
-        setImageSource(res.data.imageUrl);
+  componentDidMount() {
+    // Fetch data from the backend API endpoint
+    fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/info`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
-      .catch(err => {
-        console.log(`Error: ${err}`);
+      .then((data) => {
+        this.setState({
+          paragraphs: data.paragraphs,
+          imageUrl: data.imageUrl,
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
       });
-  }, []);
+  }
 
-  return (
-    <>
-      <h1 className="about">{aboutPageData.title}</h1>
-      {aboutPageData.content && aboutPageData.content.map((paragraph, index) => (
-        <React.Fragment key={index}>
-          <p className="about">{paragraph}</p>
-          {index !== aboutPageData.content.length - 1 && <br />}
-        </React.Fragment>
-      ))}
-      <img className="aboutimg" src={imageSource} alt="About Us" />
-    </>
-  );
-};
+  render() {
+    return (
+      <div className="about-us">
+        <h1>About Us</h1>
+        {this.state.paragraphs.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p> 
+        ))}
+        <img src={this.state.imageUrl} alt="About Us" />
+      </div>
+    );
+  }
+}
 
-export default AboutPage;
+export default AboutUs;
