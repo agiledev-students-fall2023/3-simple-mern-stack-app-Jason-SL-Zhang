@@ -26,7 +26,7 @@ app.get('/aboutus', async (req, res) => {
   try {
     res.json({
       paragraph: "Hello, my name is Jason Zhang, and I am a senior at NYU CAS majoring in Economics and Computer Science. I was born in Wenzhou, China, and moved to Great Neck, New York, when I was ten years old. \n I have a strong interest in sports, particularly basketball and football because I find these sports to be a source of immense excitement and camaraderie. My favorite NBA team is the Brooklyn Nets, and my favorite NFL team is the Buffalo Bills. In addition to sports, I enjoy playing League of Legends, watching movies, and traveling.",
-      photo: "http://localhost:5002/static/images/photo.jpg"
+      photo: "https://i.imgur.com/TXMF2p7.jpg"
     })
   } catch (err) {
     console.log(err)
