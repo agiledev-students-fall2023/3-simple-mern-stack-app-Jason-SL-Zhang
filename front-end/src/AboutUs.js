@@ -1,42 +1,42 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import './AboutUs.css'
 
-class AboutUs extends Component {
-  state = {
-    paragraphs: [],
-    imageUrl: '',
-  };
+const AboutUs = props => {
+    const [paragraph, setParagraph] = useState('')
+    const [photo, setPhoto] = useState('')
+    const [error, setError] = useState('')
 
-  componentDidMount() {
-    // Fetch data from the backend API endpoint
-    fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/info`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({
-          paragraphs: data.paragraphs,
-          imageUrl: data.imageUrl,
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }
+    const fetchAboutUs = () => {
+      axios
+        .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/aboutus`)
+        .then(response => {
+            console.log(response)
+            setParagraph(response.data.paragraph)
+            setPhoto(response.data.photo)
+        })
+        .catch(err => {
+            const errMsg = JSON.stringify(err, null, 2) 
+            setError(errMsg)
+        })
+    }
 
-  render() {
+    useEffect(() => {
+        
+        fetchAboutUs()
+    
+      }, [])
+
     return (
-      <div className="about-us">
+      <>
         <h1>About Us</h1>
-        {this.state.paragraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p> 
-        ))}
-        <img src={this.state.imageUrl} alt="About Us" />
-      </div>
-    );
+        
+        {error && <p className="Messages-error">{error}</p>}
+        <p>{paragraph}</p>
+        <img src={photo} alt="a photo of myself" />
+      </>
+    )
   }
-}
 
-export default AboutUs;
+// make this component available to be imported into any other file
+export default AboutUs

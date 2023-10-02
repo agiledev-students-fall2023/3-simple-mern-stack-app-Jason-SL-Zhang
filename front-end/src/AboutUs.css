@@ -1,8 +1,11 @@
-.about{
-    text-align: left;
+p {
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
 }
-.aboutimg{
-    width: 450px;
+
+img {
+    margin-top: 20px;
+    width: 20%;
     height: auto;
-    text-align: center;
 }
